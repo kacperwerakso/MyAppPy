@@ -17,7 +17,7 @@ def rejestracja():
             rehaslo = input("Powtórz haslo: ")
             if (rejhaslo == rehaslo): 
                 print("\n--- POMYŚLNIE UTWORZONO KONTO ---\n")
-                with open("MyAppPy/konta.txt", "a", encoding="UTF-8") as plik:
+                with open("konta.txt", "a", encoding="UTF-8") as plik:
                     plik.write(f"{rejlogin, rejhaslo}")
                 return rejestracja()
             else: 
@@ -28,7 +28,7 @@ def rejestracja():
             global haslo
             login = input("Podaj login: ")
             haslo = input("Podaj hasło: ")
-            with open("MyAppPy/konta.txt") as plik1:
+            with open("konta.txt") as plik1:
                 if login and haslo in plik1.read():
                     print("\n--- POMYŚLNIE ZALOGOWANO ---\n")
                     return menu1()                
@@ -48,7 +48,7 @@ def calc():
         print("\n0. Wyjście\n1. Dodawanie\n2. Odejmowanie\n3. Mnozenie\n4. Dzielenie\n5. Potęgowanie\n")
         z = input("Co chcesz zrobić: ")
         if z == "0":
-            with open("MyAppPy/konta.txt") as plik1:
+            with open("konta.txt") as plik1:
                 if login and haslo in plik1.read():
                     return menu1()
                 else:
@@ -88,7 +88,7 @@ def data_czas():
     while(True):
         x = input("\n0. Wyjdź\n1. Odświerz\n")
         if x == "0":
-           with open("MyAppPy/konta.txt") as plik1:
+           with open("konta.txt") as plik1:
                 if login and haslo in plik1.read():
                     return menu1()
                 else:
@@ -120,7 +120,7 @@ def zgadywanie():
                 print("Błąd")
                 continue
         elif odp == 0:
-            with open("MyAppPy/konta.txt") as plik1:
+            with open("konta.txt") as plik1:
                 if login and haslo in plik1.read():
                     return menu1()
                 else:
@@ -178,7 +178,7 @@ def orzel_reszka():
         if x == "1":
           return orzel_reszka()
         elif x == "0":
-           with open("MyAppPy/konta.txt") as plik1:
+           with open("konta.txt") as plik1:
                 if login and haslo in plik1.read():
                     return menu1()
                 else:
@@ -199,13 +199,13 @@ def bety():
                 continue
 
         if x == 0:
-                    with open("MyAppPy/konta.txt") as plik1:
+                    with open("konta.txt") as plik1:
                         if login and haslo in plik1.read():
                             return menu1()
                         else:
                             return menu()
         elif y == 0:
-                    with open("MyAppPy/konta.txt") as plik1:
+                    with open("konta.txt") as plik1:
                         if login and haslo in plik1.read():
                             return menu1()
                         else:
@@ -229,7 +229,7 @@ def temperature():
     print("\n0. Wyjście\n1. Celcjusze na Fahrenheity\n2. Celcjusze na Kelwiny\n")
     w = input("Co chcesz zrobić?: ")
     if w == "0":
-        with open("MyAppPy/konta.txt") as plik1:
+        with open("konta.txt") as plik1:
             if login and haslo in plik1.read():
                 return menu1()
             else:
@@ -265,7 +265,7 @@ def rzuty():
         if x == "1":
             return rzuty()
         elif x == "0":
-            with open("MyAppPy/konta.txt") as plik1:
+            with open("konta.txt") as plik1:
                 if login and haslo in plik1.read():
                     return menu1()
                 else:
@@ -280,9 +280,9 @@ def avatar():
         if x == "1":
             response = requests.get(f"https://avatars.dicebear.com/api/male/{random.random()}.svg")
 
-            Path("MyAppPy/avatars").mkdir(exist_ok = True) 
+            Path("avatars").mkdir(exist_ok = True) 
 
-            with open("MyAppPy/avatars/avatar.svg", "wb") as file: 
+            with open("avatars/avatar.svg", "wb") as file: 
                 file.write(response.content)
             print("Pomyślnie ustawiono nowy avatar")
         if x == "0":
@@ -294,7 +294,7 @@ def avatar():
 def wyszukiwarka():
     h = input("\n0. Wyjście\n1. Wyszukaj\n")
     if h == "0":
-        with open("MyAppPy/konta.txt") as plik1:
+        with open("konta.txt") as plik1:
             if login and haslo in plik1.read():
                 return menu1()
             else:
@@ -380,7 +380,7 @@ def menu1():
             return wyszukiwarka()
         elif y == "1" :
             print("\n--- POMYŚLNIE WYLOGOWANO ---")
-            open("MyAppPy/konta.txt", "w").close
+            open("konta.txt", "w").close
             return menu()   
         else:
             continue
