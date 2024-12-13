@@ -6,52 +6,52 @@ import webbrowser
 from pathlib import Path
 
 login = 0
-haslo = 0
-def rejestracja():
+password = 0
+def registration():
     print("\n0. Wyjście\n1. Rejestracja\n2. Logowanie\n")
     while True:
-        x = input("Co chcesz zrobić?: \n")
-        if x == "1":
-            rejlogin = input("Utwórz login: ")
-            rejhaslo = input("Utwórz haslo: ")
+        question = input("Co chcesz zrobić?: \n")
+        if question == "1":
+            reglogin = input("Utwórz login: ")
+            regPassword = input("Utwórz haslo: ")
             rehaslo = input("Powtórz haslo: ")
-            if (rejhaslo == rehaslo): 
+            if (regPassword == rehaslo): 
                 print("\n--- POMYŚLNIE UTWORZONO KONTO ---\n")
-                with open("konta.txt", "a", encoding="UTF-8") as plik:
-                    plik.write(f"{rejlogin, rejhaslo}")
-                return rejestracja()
+                with open("accounts.txt", "a", encoding="UTF-8") as file:
+                    file.write(f"{reglogin, regPassword}")
+                return registration()
             else: 
                 print("\nBłąd")
-                return rejestracja()
-        elif x == "2":
+                return registration()
+        elif question == "2":
             global login
-            global haslo
+            global password
             login = input("Podaj login: ")
-            haslo = input("Podaj hasło: ")
-            with open("konta.txt") as plik1:
-                if login and haslo in plik1.read():
+            password = input("Podaj hasło: ")
+            with open("accounts.txt") as file:
+                if login and password in file.read():
                     print("\n--- POMYŚLNIE ZALOGOWANO ---\n")
-                    return menu1()                
+                    return menuAfterLogin()                
                 else:
                     print("\nBłąd")
-                    return rejestracja()
-        elif x == "0":
+                    return registration()
+        elif question == "0":
             return menu()
         else:
             print("\nBłąd")
-            return rejestracja()
+            return registration()
 
 class MenuCreator:
     @staticmethod
     def menuHtml():
         print("\n--- Utwórz plik HTML z wybraną treścią ---\n")
-        wybor = input("\n0. Wyjście\n1. Utwórz stronę\n")
-        if wybor == "1":
-            Wpisz().wpisywanie()
-        elif wybor == "0":
-            with open("konta.txt") as plik1:
-                if login and haslo in plik1.read():
-                    return menu1()
+        choice = input("\n0. Wyjście\n1. Utwórz stronę\n")
+        if choice == "1":
+            InputHtml().enterPrompt()
+        elif choice == "0":
+            with open("accounts.txt") as file:
+                if login and password in file.read():
+                    return menuAfterLogin()
                 else:
                     return menu()
         else:
@@ -59,26 +59,26 @@ class MenuCreator:
 
 
 
-class Wpisz:
+class InputHtml:
     @staticmethod
-    def wpisywanie():
+    def enterPrompt():
         print("\n----- POMYŚLNIE ROZPOCZĘTO TWORZENIE STRONY -----\n\n")
-        naglowek = input("Wprowadź treść nagłówka na stronie: ")
-        kolor_naglowek = input("Wybierz kolor nagłówka (j. ang): ")
-        tresc = input("Wprowadź treść pod nagłówkiem: ")
-        kolor_tresc = input("Wybierz kolor treści (j. ang): ")
-        tlo = input("Wybierz tło strony (j. ang): ")
-        nazwa = input("Nazwa pliku przechowującego stronę: ")
-        Pelna_nazwa = open(f"{nazwa}.html", "w")
-        Pelna_nazwa.write(f"<html>\n<head>\n<title>Tresc do HTML</title>\n</head> <body bgcolor={tlo}> <h1><font color={kolor_naglowek}><center><br><br>{naglowek}</center></font></h1>\n<center><p><br><br><font color={kolor_tresc}>{tresc}</font></p></center>\n</body></html>")
-        Pelna_nazwa.close()
-        ostatnie = input("\n----- POMYŚLNIE UKOŃCZONO TWORZENIE STRONY -----\n\n0. Wyjście\n1. Stwórz kolejny\n")
-        if ostatnie == "1":
+        title = input("Wprowadź treść nagłówka na stronie: ")
+        titleColor = input("Wybierz kolor nagłówka (j. ang): ")
+        text = input("Wprowadź treść pod nagłówkiem: ")
+        textColor = input("Wybierz kolor treści (j. ang): ")
+        backgroundColor = input("Wybierz tło strony (j. ang): ")
+        nameOfFile = input("Nazwa pliku przechowującego stronę: ")
+        fullNameOfFile = open(f"{nameOfFile}.html", "w")
+        fullNameOfFile.write(f"<html>\n<head>\n<title>Tresc do HTML</title>\n</head> <body bgcolor={backgroundColor}> <h1><font color={titleColor}><center><br><br>{title}</center></font></h1>\n<center><p><br><br><font color={textColor}>{text}</font></p></center>\n</body></html>")
+        fullNameOfFile.close()
+        lastQuestion = input("\n----- POMYŚLNIE UKOŃCZONO TWORZENIE STRONY -----\n\n0. Wyjście\n1. Stwórz kolejny\n")
+        if lastQuestion == "1":
             return MenuCreator().menuHtml()
-        elif ostatnie == "0":
-            with open("konta.txt") as plik1:
-                if login and haslo in plik1.read():
-                    return menu1()
+        elif lastQuestion == "0":
+            with open("accounts.txt") as file:
+                if login and password in file.read():
+                    return menuAfterLogin()
                 else:
                     return menu()
         else:
@@ -87,14 +87,14 @@ class Wpisz:
 activation = MenuCreator()
 
 
-def calc():
+def calculator():
     while(True):
         print("\n0. Wyjście\n1. Dodawanie\n2. Odejmowanie\n3. Mnozenie\n4. Dzielenie\n5. Potęgowanie\n")
-        z = input("Co chcesz zrobić: ")
-        if z == "0":
-            with open("konta.txt") as plik1:
-                if login and haslo in plik1.read():
-                    return menu1()
+        question = input("Co chcesz zrobić?: ")
+        if question == "0":
+            with open("accounts.txt") as file:
+                if login and password in file.read():
+                    return menuAfterLogin()
                 else:
                     return menu()
         try:
@@ -105,50 +105,50 @@ def calc():
                 continue
 
     
-        if z == "1":
+        if question == "1":
             print("\nWynik dodawania: ",x + y) 
-        elif z == "2":
+        elif question == "2":
             print("\nWynik odejmowania: ",x - y)
-        elif z == "3":
+        elif question == "3":
             print("\nWynik mnozenia: ",x * y)
-        elif z == "4":
+        elif question == "4":
             if x == 0 or y == 0:
                 print("\nBłąd dzielenia przez 0")
             else:
                 print("\nWynik dzielenia: ",x / y)
-        elif z == "5":
+        elif question == "5":
             print("\nWynik potęgowania: ",x ** y)
         else:
             print("\nBłąd")
-            return calc()
+            return calculator()
 
 
 
 
 
-def data_czas():
+def dataTime():
     datetime.datetime.now()
     print("\nAktualna data i godzina: ",datetime.datetime.now())
     while(True):
-        x = input("\n0. Wyjdź\n1. Odświerz\n")
-        if x == "0":
-           with open("konta.txt") as plik1:
-                if login and haslo in plik1.read():
-                    return menu1()
+        question = input("\n0. Wyjdź\n1. Odświerz\n")
+        if question == "0":
+           with open("accounts.txt") as file:
+                if login and password in file.read():
+                    return menuAfterLogin()
                 else:
                     return menu()
-        if x == "1":
-          return data_czas()
+        if question == "1":
+          return dataTime()
         else:
           continue
 
 
 
-def zgadywanie():
+def guess():
     while(True):
-        liczba = random.randint(1, 10)
+        chosenNumber = random.randint(1, 10)
         try:
-            odp = int(input("\nZgadnij losową liczbę od 1 do 10: "))
+            answear = int(input("\nZgadnij losową liczbę od 1 do 10: "))
             print("\n0 - Wyjscie\n")
         except ValueError:
             print("\nBłąd")
@@ -156,82 +156,78 @@ def zgadywanie():
             print("\n0 - Wyjscie\n")
             continue
 
-        if liczba == odp:
+        if chosenNumber == answear:
             try:
                 print("\nZGADŁEŚ!")
                 continue
             except ValueError:
                 print("Błąd")
                 continue
-        elif odp == 0:
-            with open("konta.txt") as plik1:
-                if login and haslo in plik1.read():
-                    return menu1()
+        elif answear == 0:
+            with open("accounts.txt") as file:
+                if login and password in file.read():
+                    return menuAfterLogin()
                 else:
                     return menu()
         else:
             print("\nNIE ZGADŁEŚ, spróbuj ponownie")
-            return zgadywanie()
+            return guess()
 
 
-definicje = {}
-def slownik():
+definition = {}
+def dictionary():
     while(True):
         print("\n1. Dodaj definicje")
         print("2. Znajdz definicje")
         print("3. Usun definicje")
         print("0. Wyjście")
-        wybor = input("\nCo chcesz zrobic?: ")
+        choice = input("\nCo chcesz zrobic?: ")
 
-        if wybor == "1":
-            klucz = input("Podaj slowo: ")
-            definicja = input("Podaj definicje tego slowa: ")
-            definicje[klucz] = definicja
+        if choice == "1":
+            key = input("Podaj slowo: ")
+            definitions = input("Podaj definicje tego slowa: ")
+            definition[key] = definitions
             print("\nDODANO DEFINICJĘ\n")
-        elif wybor == "2":
-            klucz = input("Podaj szukana definicje: ")
-            if klucz in definicje:
-                print(definicje[klucz])
+        elif choice == "2":
+            key = input("Podaj szukana definicje: ")
+            if key in definition:
+                print(definition[key])
             else:
-                print("\nNIE ZNALEZIONO", klucz)
-        elif wybor == "3":
-            klucz = input("Ktora definicje chcesz usunac?: ")
-            if klucz in definicje:
-                del definicje[klucz]
-                print("\nUSUNIĘTO DEFINICJĘ", klucz)
+                print("\nNIE ZNALEZIONO", key)
+        elif choice == "3":
+            key = input("Ktora definicje chcesz usunac?: ")
+            if key in definition:
+                del definition[key]
+                print("\nUSUNIĘTO DEFINICJĘ", key)
             else:
-                print("\nNIE ZNALEZIONO", klucz)
-        elif wybor == "0":
-                    return menu1()
+                print("\nNIE ZNALEZIONO", key)
+        elif choice == "0":
+                    return menuAfterLogin()
         else:
             print("\nPOZA ZAKRESEM\n")
-            return slownik()
+            return dictionary()
                         
 
 
 
-
-
-
-
-def orzel_reszka():
+def headsTails():
     orzelreszka = ["\nOrzeł", "\nReszka"]
     print(random.choice(orzelreszka))
     while(True):
-        x = input("\n0. Wyjdź\n1. Rzuć monetą\n")
-        if x == "1":
-          return orzel_reszka()
-        elif x == "0":
-           with open("konta.txt") as plik1:
-                if login and haslo in plik1.read():
-                    return menu1()
+        question = input("\n0. Wyjdź\n1. Rzuć monetą\n")
+        if question == "1":
+          return headsTails()
+        elif question == "0":
+           with open("accounts.txt") as file:
+                if login and password in file.read():
+                    return menuAfterLogin()
                 else:
                     return menu()
         else:
           continue
 
 
-def bety():
+def bets():
     print("\nWitaj w tłumaczu kursów/betów")
     while(True):
         try:
@@ -241,19 +237,18 @@ def bety():
         except ValueError:
                 print("\nBłąd")
                 continue
-
         if x == 0:
-                    with open("konta.txt") as plik1:
-                        if login and haslo in plik1.read():
-                            return menu1()
-                        else:
-                            return menu()
+            with open("accounts.txt") as file:
+                if login and password in file.read():
+                    return menuAfterLogin()
+                else:
+                    return menu()
         elif y == 0:
-                    with open("konta.txt") as plik1:
-                        if login and haslo in plik1.read():
-                            return menu1()
-                        else:
-                            return menu()
+            with open("accounts.txt") as file1:
+                if login and password in file1.read():
+                    return menuAfterLogin()
+                else:
+                    return menu()
         elif x < y:
             print("\nLudzie obstawiają zawodnika z kursem", x, "i jest bardziej prawdopodobne, że wygra z zawodnikiem z kursem", y)
 
@@ -271,14 +266,14 @@ def bety():
 def temperature():
   while(True):
     print("\n0. Wyjście\n1. Celcjusze na Fahrenheity\n2. Celcjusze na Kelwiny\n")
-    w = input("Co chcesz zrobić?: ")
-    if w == "0":
-        with open("konta.txt") as plik1:
-            if login and haslo in plik1.read():
-                return menu1()
+    question = input("Co chcesz zrobić?: ")
+    if question == "0":
+        with open("accounts.txt") as file:
+            if login and password in file.read():
+                return menuAfterLogin()
             else:
                 return menu()
-    elif w == "1":
+    elif question == "1":
         try:
             y = float(input("\nPodaj stopnie Celcjusza: "))
             print("\n",y, "to", y * 1.8 + 32, "Fahrenheitow")
@@ -286,7 +281,7 @@ def temperature():
         except ValueError:
             print("\nBłąd\n")
             continue
-    elif w == "2":
+    elif question == "2":
         try:
             y = float(input("\nPodaj stopnie Celcjusza: "))
             print("\n",y, "to", y + 273.15, "Kelwinow")
@@ -302,16 +297,16 @@ def temperature():
 
 
 
-def rzuty():
+def throw():
     while(True):
         print("\nWylosowałeś: ", random.randint(1, 6))
-        x = input("\n1. Rzuć\n0. Wyjście\n")
-        if x == "1":
-            return rzuty()
-        elif x == "0":
-            with open("konta.txt") as plik1:
-                if login and haslo in plik1.read():
-                    return menu1()
+        answer = input("\n1. Rzuć\n0. Wyjście\n")
+        if answer == "1":
+            return throw()
+        elif answer == "0":
+            with open("accounts.txt") as file:
+                if login and password in file.read():
+                    return menuAfterLogin()
                 else:
                     return menu()
         else:
@@ -320,8 +315,8 @@ def rzuty():
 
 def avatar():
     while(True):
-        x = input("0. Wyjście\n1. Wylosuj avatar\n")
-        if x == "1":
+        draw = input("0. Wyjście\n1. Wylosuj avatar\n")
+        if draw == "1":
             response = requests.get(f"https://avatars.dicebear.com/api/male/{random.random()}.svg")
 
             Path("avatars").mkdir(exist_ok = True) 
@@ -329,26 +324,26 @@ def avatar():
             with open("avatars/avatar.svg", "wb") as file: 
                 file.write(response.content)
             print("Pomyślnie ustawiono nowy avatar")
-        if x == "0":
-            return menu1()
+        if draw == "0":
+            return menuAfterLogin()
         else:
             return avatar()
 
 
-def wyszukiwarka():
-    h = input("\n0. Wyjście\n1. Wyszukaj\n")
-    if h == "0":
-        with open("konta.txt") as plik1:
-            if login and haslo in plik1.read():
-                return menu1()
+def webBrowse():
+    browse = input("\n0. Wyjście\n1. Wyszukaj\n")
+    if browse == "0":
+        with open("accounts.txt") as file:
+            if login and password in file.read():
+                return menuAfterLogin()
             else:
                 return menu()
-    elif h == "1":
-        szukana = input("Wpisz stronę internetową: ")
-        webbrowser.open(szukana)
-        return wyszukiwarka()
+    elif browse == "1":
+        search = input("Wpisz stronę internetową: ")
+        webbrowser.open(search)
+        return webBrowse()
     else:
-        return wyszukiwarka()
+        return webBrowse()
 
 
 
@@ -364,34 +359,34 @@ def menu():
         print("+---------------------------------------+")
         print("|                                       |\n|  0. Wyłącz aplikację                  |\n|                                       |")
         print("+---------------------------------------+\n")
-        y = input("\nWybierz czynność(numer):  ")
-        if y == "0":
+        whatToDo = input("\nWybierz czynność(numer):  ")
+        if whatToDo == "0":
             return "DO ZOBACZENIA!"
-        elif y == "2":
-            return calc()
-        elif y == "9":
-            return orzel_reszka()
-        elif y == "4":
-            return bety()
-        elif y == "5":
+        elif whatToDo == "2":
+            return calculator()
+        elif whatToDo == "9":
+            return headsTails()
+        elif whatToDo == "4":
+            return bets()
+        elif whatToDo == "5":
             return temperature()
-        elif y == "8":
-            return zgadywanie()
-        elif y == "7":
+        elif whatToDo == "8":
+            return guess()
+        elif whatToDo == "7":
             return activation.menuHtml()
-        elif y == "6":
-            return data_czas()
-        elif y == "1":
-            return rejestracja()
-        elif y == "3":
-            return wyszukiwarka()
-        elif y == "10":
-            return rzuty()   
+        elif whatToDo == "6":
+            return dataTime()
+        elif whatToDo == "1":
+            return registration()
+        elif whatToDo == "3":
+            return webBrowse()
+        elif whatToDo == "10":
+            return throw()   
         else:
             continue
 
 
-def menu1():
+def menuAfterLogin():
     while(True):
         print("\n+------ WITAJ W APLIKACJI MyAppPY ------+")
         print("|                                       |\n|                                       |\n+---------------- KONTO ----------------+\n|                                       |\n|  1.  Usuń konto                       |\n|  2.  Avatar                           |\n|  3.  Notatnik                         |\n|                                       |\n+-------------- NARZĘDZIA --------------+")
@@ -401,38 +396,38 @@ def menu1():
         print("+---------------------------------------+")
         print("|                                       |\n|  0. Wyłącz aplikację                  |\n|                                       |")
         print("+---------------------------------------+\n")
-        y = input("\nWybierz czynność(numer):  ")
-        if y == "0":
+        whatToDo = input("\nWybierz czynność(numer):  ")
+        if whatToDo == "0":
             return "DO ZOBACZENIA!"
-        elif y == "4":
-            return calc()
-        elif y == "12":
-            return rzuty()
-        elif y == "6":
-            return bety()
-        elif y == "7":
+        elif whatToDo == "4":
+            return calculator()
+        elif whatToDo == "12":
+            return throw()
+        elif whatToDo == "6":
+            return bets()
+        elif whatToDo == "7":
             return temperature()
-        elif y == "11":
-            return orzel_reszka()
-        elif y == "3":
-            return slownik()
-        elif y == "10":
-            return zgadywanie()
-        elif y == "8":
-            return data_czas()
-        elif y == "2":
+        elif whatToDo == "11":
+            return headsTails()
+        elif whatToDo == "3":
+            return dictionary()
+        elif whatToDo == "10":
+            return guess()
+        elif whatToDo == "8":
+            return dataTime()
+        elif whatToDo == "2":
             return avatar()
-        elif y == "9":
+        elif whatToDo == "9":
             return activation.menuHtml()
-        elif y == "5":
-            return wyszukiwarka()
-        elif y == "1" :
+        elif whatToDo == "5":
+            return webBrowse()
+        elif whatToDo == "1" :
             print("\n--- POMYŚLNIE WYLOGOWANO ---")
-            open("konta.txt", "w").close
+            open("accounts.txt", "w").close
             return menu()   
         else:
             continue
 
 
-odpowiedz = menu()
-print(odpowiedz)
+activationMenu = menu()
+print(activationMenu)
