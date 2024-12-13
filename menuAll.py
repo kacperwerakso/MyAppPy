@@ -14,8 +14,8 @@ def registration():
         if question == "1":
             reglogin = input("Utwórz login: ")
             regPassword = input("Utwórz haslo: ")
-            rehaslo = input("Powtórz haslo: ")
-            if (regPassword == rehaslo): 
+            rePassword = input("Powtórz haslo: ")
+            if (regPassword == rePassword): 
                 print("\n--- POMYŚLNIE UTWORZONO KONTO ---\n")
                 with open("accounts.txt", "a", encoding="UTF-8") as file:
                     file.write(f"{reglogin, regPassword}")
