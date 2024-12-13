@@ -41,6 +41,50 @@ def rejestracja():
             print("\nBłąd")
             return rejestracja()
 
+class MenuCreator:
+    @staticmethod
+    def menuHtml():
+        print("\n--- Utwórz plik HTML z wybraną treścią ---\n")
+        wybor = input("\n0. Wyjście\n1. Utwórz stronę\n")
+        if wybor == "1":
+            Wpisz().wpisywanie()
+        elif wybor == "0":
+            with open("konta.txt") as plik1:
+                if login and haslo in plik1.read():
+                    return menu1()
+                else:
+                    return menu()
+        else:
+            return MenuCreator().menuHtml()
+
+
+
+class Wpisz:
+    @staticmethod
+    def wpisywanie():
+        print("\n----- POMYŚLNIE ROZPOCZĘTO TWORZENIE STRONY -----\n\n")
+        naglowek = input("Wprowadź treść nagłówka na stronie: ")
+        kolor_naglowek = input("Wybierz kolor nagłówka (j. ang): ")
+        tresc = input("Wprowadź treść pod nagłówkiem: ")
+        kolor_tresc = input("Wybierz kolor treści (j. ang): ")
+        tlo = input("Wybierz tło strony (j. ang): ")
+        nazwa = input("Nazwa pliku przechowującego stronę: ")
+        Pelna_nazwa = open(f"{nazwa}.html", "w")
+        Pelna_nazwa.write(f"<html>\n<head>\n<title>Tresc do HTML</title>\n</head> <body bgcolor={tlo}> <h1><font color={kolor_naglowek}><center><br><br>{naglowek}</center></font></h1>\n<center><p><br><br><font color={kolor_tresc}>{tresc}</font></p></center>\n</body></html>")
+        Pelna_nazwa.close()
+        ostatnie = input("\n----- POMYŚLNIE UKOŃCZONO TWORZENIE STRONY -----\n\n0. Wyjście\n1. Stwórz kolejny\n")
+        if ostatnie == "1":
+            return MenuCreator().menuHtml()
+        elif ostatnie == "0":
+            with open("konta.txt") as plik1:
+                if login and haslo in plik1.read():
+                    return menu1()
+                else:
+                    return menu()
+        else:
+            return MenuCreator().menuHtml()
+
+activation = MenuCreator()
 
 
 def calc():
@@ -314,33 +358,35 @@ def menu():
     while(True):
         print("\n+------ WITAJ W APLIKACJI MyAppPY ------+")
         print("|                                       |\n|                                       |\n+---------------- KONTO ----------------+\n|                                       |\n|  1.  Utwórz konto/zaloguj             |\n|                                       |\n+-------------- NARZĘDZIA --------------+")
-        print("|                                       |\n|  2.  Kalkulator                       |\n|  3.  Wyszukiwarka internetowa         |\n|  4.  Tłumacz kursów/betów             |\n|  5.  Przelicznik temperatur           |\n|  6.  Aktualna data i godzina          |")
+        print("|                                       |\n|  2.  Kalkulator                       |\n|  3.  Wyszukiwarka internetowa         |\n|  4.  Tłumacz kursów/betów             |\n|  5.  Przelicznik temperatur           |\n|  6.  Aktualna data i godzina          |\n|  7.  Utwórz HTML                      |")
         print("|                                       |\n+----------------- GRY -----------------+")
-        print("|                                       |\n|  7. Gra - Zgadnij liczbę              |\n|  8. Gra - Orzeł czy reszka            |\n|  9. Gra - Rzut kością                 |\n|                                       |")
+        print("|                                       |\n|  8. Gra - Zgadnij liczbę              |\n|  9. Gra - Orzeł czy reszka            |\n|  10. Gra - Rzut kością                |\n|                                       |")
         print("+---------------------------------------+")
         print("|                                       |\n|  0. Wyłącz aplikację                  |\n|                                       |")
         print("+---------------------------------------+\n")
         y = input("\nWybierz czynność(numer):  ")
         if y == "0":
-            break
+            return "DO ZOBACZENIA!"
         elif y == "2":
             return calc()
         elif y == "9":
-            return rzuty()
+            return orzel_reszka()
         elif y == "4":
             return bety()
         elif y == "5":
             return temperature()
         elif y == "8":
-            return orzel_reszka()
-        elif y == "7":
             return zgadywanie()
+        elif y == "7":
+            return activation.menuHtml()
         elif y == "6":
             return data_czas()
         elif y == "1":
             return rejestracja()
         elif y == "3":
-            return wyszukiwarka()    
+            return wyszukiwarka()
+        elif y == "10":
+            return rzuty()   
         else:
             continue
 
@@ -349,33 +395,35 @@ def menu1():
     while(True):
         print("\n+------ WITAJ W APLIKACJI MyAppPY ------+")
         print("|                                       |\n|                                       |\n+---------------- KONTO ----------------+\n|                                       |\n|  1.  Usuń konto                       |\n|  2.  Avatar                           |\n|  3.  Notatnik                         |\n|                                       |\n+-------------- NARZĘDZIA --------------+")
-        print("|                                       |\n|  4.  Kalkulator                       |\n|  5.  Wyszukiwarka internetowa         |\n|  6.  Tłumacz kursów/betów             |\n|  7.  Przelicznik temperatur           |\n|  8.  Aktualna data i godzina          |")
+        print("|                                       |\n|  4.  Kalkulator                       |\n|  5.  Wyszukiwarka internetowa         |\n|  6.  Tłumacz kursów/betów             |\n|  7.  Przelicznik temperatur           |\n|  8.  Aktualna data i godzina          |\n|  9.  Utwórz HTML                      |")
         print("|                                       |\n+----------------- GRY -----------------+")
-        print("|                                       |\n|  9. Gra - Zgadnij liczbę              |\n| 10. Gra - Orzeł czy reszka            |\n| 11. Gra - Rzut kością                 |\n|                                       |")
+        print("|                                       |\n|  10. Gra - Zgadnij liczbę             |\n|  11. Gra - Orzeł czy reszka           |\n|  12. Gra - Rzut kością                |\n|                                       |")
         print("+---------------------------------------+")
         print("|                                       |\n|  0. Wyłącz aplikację                  |\n|                                       |")
         print("+---------------------------------------+\n")
         y = input("\nWybierz czynność(numer):  ")
         if y == "0":
-            break
+            return "DO ZOBACZENIA!"
         elif y == "4":
             return calc()
-        elif y == "11":
+        elif y == "12":
             return rzuty()
         elif y == "6":
             return bety()
         elif y == "7":
             return temperature()
-        elif y == "10":
+        elif y == "11":
             return orzel_reszka()
         elif y == "3":
             return slownik()
-        elif y == "9":
+        elif y == "10":
             return zgadywanie()
         elif y == "8":
             return data_czas()
         elif y == "2":
             return avatar()
+        elif y == "9":
+            return activation.menuHtml()
         elif y == "5":
             return wyszukiwarka()
         elif y == "1" :
